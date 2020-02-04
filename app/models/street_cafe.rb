@@ -24,6 +24,27 @@ class StreetCafe < ApplicationRecord
     end
   end
 
+  def self.return_by_size(size)
+    where("category LIKE ?", "%#{size}")
+  end
+
+  def self.to_csv(options = {})
+  CSV.generate(options) do |csv_file|
+    csv_file << csv_header_row
+
+    all.each do |restaurant|
+      csv_file << restaurant.to_csv
+    end
+  end
+end
+
+  def to_csv
+    [id, name, street_address, post_code, number_of_chairs, category]
+  end
+
+  def self.csv_header_row
+    %w(ID Name Street_Address Post_Code Number_of_chairs Category)
+  end
 
 
 end
