@@ -28,6 +28,13 @@ class StreetCafe < ApplicationRecord
     where("category LIKE ?", "%#{size}")
   end
 
+  def self.concat_category_and_name
+    all.each do |cafe|
+      new_name = cafe.category + " " +  cafe.name
+      cafe.update_column(:name, new_name)
+    end
+  end
+
   def self.to_csv(options = {})
   CSV.generate(options) do |csv_file|
     csv_file << csv_header_row
