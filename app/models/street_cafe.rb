@@ -63,6 +63,10 @@ class StreetCafe < ApplicationRecord
     end
   end
 
+  def self.write_to_csv
+    File.write('small_street_cafes.csv', self.all.to_csv)
+  end
+
   def self.to_csv(options = {})
     CSV.generate(options) do |csv_file|
       csv_file << csv_header_row
