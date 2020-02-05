@@ -4,33 +4,9 @@ namespace :import do
   desc "Categorize street cafes based on number of chairs"
   task categorize_cafes: :environment do
 
-    ls1_cafes = StreetCafe.with_post_code_prefix('LS1')
-    ls2_cafes = StreetCafe.with_post_code_prefix('LS2')
-    other_cafes = StreetCafe.post_code_outliers
-
-    num_of_chairs_50th_percentile = ls2_cafes.chair_numbers_percentile_50
-
-    other_cafes.each do |cafe|
-      cafe.update_column(:category, 'other')
-    end
-
-    ls1_cafes.each do |cafe|
-      if cafe.number_of_chairs < 10
-        cafe.update_column(:category, "ls1 small")
-      elsif cafe.number_of_chairs >= 10 && cafe.number_of_chairs < 100
-        cafe.update_column(:category, "ls1 medium")
-      elsif cafe.number_of_chairs >= 100
-        cafe.update_column(:category, "ls1 large")
-      end
-    end
-
-    ls2_cafes.each do |cafe|
-      if cafe.number_of_chairs < num_of_chairs_50th_percentile
-        cafe.update_column(:category, 'ls2 small')
-      elsif cafe.number_of_chairs > num_of_chairs_50th_percentile
-        cafe.update_column(:category, 'ls2 large')
-      end
-    end
+    StreetCafe.with_post_code_prefix('LS1').categorize_LS1_cafes
+    StreetCafe.with_post_code_prefix('LS2').categorize_LS2_cafes
+    StreetCafe.categorize_post_code_outliers
 
   end
 end
