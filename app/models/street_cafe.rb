@@ -6,12 +6,40 @@ class StreetCafe < ApplicationRecord
 
 
   def self.with_post_code_prefix(prefix)
-    add_whitespace = prefix + " "
-    where("post_code LIKE ?", "#{add_whitespace}%")
+    prefix = prefix + " "
+    where("post_code LIKE ?", "#{prefix}%")
   end
 
-  def self.post_code_outliers
-    where.not("post_code LIKE 'LS1 %' OR post_code LIKE 'LS2 %'")
+  def self.categorize_LS1_cafes
+    cafes = self.all
+    cafes.each do |cafe|
+      if cafe.number_of_chairs < 10
+        cafe.update_column(:category, "ls1 small")
+      elsif cafe.number_of_chairs >= 10 && cafe.number_of_chairs < 100
+        cafe.update_column(:category, "ls1 medium")
+      elsif cafe.number_of_chairs >= 100
+        cafe.update_column(:category, "ls1 large")
+      end
+    end
+  end
+
+  def self.categorize_LS2_cafes
+    cafes = self.all
+    num_of_chairs_50th_percentile = cafes.chair_numbers_percentile_50
+    cafes.each do |cafe|
+      if cafe.number_of_chairs < num_of_chairs_50th_percentile
+        cafe.update_column(:category, 'ls2 small')
+      elsif cafe.number_of_chairs > num_of_chairs_50th_percentile
+        cafe.update_column(:category, 'ls2 large')
+      end
+    end
+  end
+
+  def self.categorize_post_code_outliers
+    cafes = where.not("post_code LIKE 'LS1 %' OR post_code LIKE 'LS2 %'")
+    cafes.each do |cafe|
+      cafe.update_column(:category, 'other')
+    end
   end
 
   def self.chair_numbers_percentile_50
@@ -36,14 +64,13 @@ class StreetCafe < ApplicationRecord
   end
 
   def self.to_csv(options = {})
-  CSV.generate(options) do |csv_file|
-    csv_file << csv_header_row
-
-    all.each do |restaurant|
-      csv_file << restaurant.to_csv
+    CSV.generate(options) do |csv_file|
+      csv_file << csv_header_row
+      all.each do |restaurant|
+        csv_file << restaurant.to_csv
+      end
     end
   end
-end
 
   def to_csv
     [id, name, street_address, post_code, number_of_chairs, category]

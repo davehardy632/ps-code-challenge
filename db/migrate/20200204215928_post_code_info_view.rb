@@ -12,7 +12,7 @@ class PostCodeInfoView < ActiveRecord::Migration[5.2]
                     c.name,
                     ROW_NUMBER() OVER(PARTITION BY c.post_code ORDER BY c.number_of_chairs DESC) as ck
                  FROM street_cafes c)
-              SELECT s.post_code, agg_tbl.total_places, agg_tbl.total_chairs, agg_tbl.chairs_pct, s.name as max_chairs, s.number_of_chairs as place_with_max_chairs
+              SELECT s.post_code, agg_tbl.total_places, agg_tbl.total_chairs, agg_tbl.chairs_pct, s.name as place_with_max_chairs, s.number_of_chairs as max_chairs
               FROM summary s
               INNER JOIN (SELECT post_code,
                                    SUM(number_of_chairs) as total_chairs,
