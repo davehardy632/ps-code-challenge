@@ -1,8 +1,8 @@
 require 'csv'
 
 namespace :import do
-  desc "Import street cafe data from csv file"
-  task street_cafe_data: :environment do
+  desc "Importing street cafe csv data into the database"
+  task street_cafe_csv: :environment do
     CSV.foreach('./csv_files/street_cafes_2015-16.csv', headers: true) do |row|
       row_data = row.to_h
 
