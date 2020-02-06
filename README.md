@@ -51,13 +51,9 @@ CREATE VIEW categories_info
 
 Unit Testing
 
-*Each individual method is tested independently in a model spec located at the file path below*
-
-```/spec/models/street_cafe_spec.rb```
+```spec/models/street_cafe_spec.rb```
 
 Integration Testing
-
-*The rake tasks are tested and run in succession at the file path below*
 
 ```spec/tasks/rake_tasks_spec.rb```
 
@@ -89,7 +85,7 @@ Methods Used
 
 ```return_by_size()```
 
-```write_to_csv```
+```write_to_csv()```
 
 Rake Task Name
 
