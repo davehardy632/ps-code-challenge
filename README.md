@@ -107,8 +107,6 @@ Rake Task Name
 
 ```concatenate:med_and_large_cafe_names```
 
-# rake 'export_and_delete:small_street_cafes['new_file.csv']'
-
 ## Instructions
 
 1. Clone the Repository
@@ -129,7 +127,7 @@ Rake Task Name
 
 9. Run ```export_and_delete:small_street_cafes``` to export the street cafes categorized as 'small' to a csv file, and then delete the records. The csv will generate within the ```csv_export_files``` folder. The full path will be ```csv_export_files/small_street_cafes``` 
 
-..* Additionally, you can pass in an optional argument when running this task, this argument allows the exported csv file to be renames, as long as it is followed by ```.csv``` and is wrapped in single quotes. EX: ```rake 'export_and_delete:small_street_cafes['new_file.csv']'```
+> Additionally, you can pass in an optional argument when running this task, this argument allows the exported csv file to be renamed, as long as it is followed by ```.csv``` and is wrapped in single quotes. EX: ```rake 'export_and_delete:small_street_cafes['new_file.csv']'```
 
 10. Run ```concatenate:med_and_large_cafe_names``` to concatenate the category to the beginning of the name on all street cafes categorized as medium or large
 
