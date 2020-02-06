@@ -56,20 +56,14 @@ describe "Rake Tasks" do
         Rake::Task['export_and_delete:small_street_cafes'].invoke("test_file.csv")
 
         expect(StreetCafe.count).to eq(5)
-
         expect(File.exist?("csv_export_files/test_file.csv")).to eq(true)
+
         contents = CSV.read("csv_export_files/test_file.csv")
 
-        # 2 small cafes plus the headers row makes a length of 3
         expect(contents.length).to eq(3)
-        # testing headers in the csv file, when sorted the headers are the last array element
         expect(contents.sort.last).to eq(["ID", "Name", "Street_Address", "Post_Code", "Number_of_chairs", "Category"])
-        # testing first small cafe
-        # expect(contents.sort[1][1]).to eq("Cafe 1")
-        expect(contents.sort[0][5]).to eq("ls1 small")
-        # testing second small cafe category
-        # expect(contents.sort[2][1]).to eq("Cafe 4")
-        expect(contents.sort[1][5]).to eq("ls2 small")
+        expect(contents.sort.first[5]).to eq("ls1 small")
+        expect(contents.sort.second[5]).to eq("ls2 small")
 
         File.delete("csv_export_files/test_file.csv")
       end

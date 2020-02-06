@@ -63,11 +63,11 @@ class StreetCafe < ApplicationRecord
     end
   end
 
-  def self.write_to_csv(argument)
-    if argument.file_name.nil?
+  def self.write_to_csv(task_param)
+    if task_param.file_name.nil?
       File.write('csv_export_files/small_street_cafes.csv', self.all.to_csv)
     else
-      name_and_folder = 'csv_export_files/' + argument.file_name
+      name_and_folder = 'csv_export_files/' + task_param.file_name
       File.write(name_and_folder, self.all.to_csv)
     end
   end

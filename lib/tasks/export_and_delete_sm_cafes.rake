@@ -1,6 +1,5 @@
 require 'csv'
 
-
 namespace :export_and_delete do
   desc "For street cafes categorized as small, records are exported to a csv and then deleted"
   task :small_street_cafes, [:file_name] => :environment do |t, arg|
@@ -11,8 +10,3 @@ namespace :export_and_delete do
 
   end
 end
-
-
-
-
-# rake 'export_and_delete:small_street_cafes['new_file.csv']'
