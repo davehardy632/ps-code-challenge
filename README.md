@@ -139,9 +139,3 @@ For individual test files you can run ```rspec spec/<FILE_PATH>```
 ### Additional Notes on Testing
 
 When running the ```rake_tasks_spec.rb``` the ```export_and_delete:small_street_cafes``` task generates a csv test file and then deletes it. If you have already generated the small_street_cafes.csv file in development, that file will be deleted when running the test. This can easily be changed in the test file by removing the last line of code that deletes the csv after running.
-
-### Improvements I Would Consider with More Time
-
-I started out testing each rake task in its own file, however I began to have issues with lingering test data across files. For this reason I decided to test all rake tasks successively in one block, and that seemed to fix the issue. With more time I would look into breaking the rake task tests into seperate blocks so that I could run them individually.
-
-I noticed the lingering test data again after consolidating all rake task tests to one block. However the issue seemed to disappear, and the tests are now passing without a problem, hopefully there aren't any issues when you run the test suite on your end.
