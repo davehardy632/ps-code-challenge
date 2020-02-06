@@ -6,7 +6,7 @@
 
 ### Post Code Info View
 
-*I was able to verify the post_code_info view by comparing queries run on both the street_cafes table, and the post code info view and then comparing the return values.*
+*I was able to verify the post_code_info view by comparing queries run on both the street_cafes table, and the post_code_info view and then comparing the return values.*
 
 **SQL Below**
 
@@ -45,13 +45,13 @@ CREATE VIEW categories_info
 
 ## Scripts / Rake Tasks
 
-*Each script is written and executed within a rake task.*
-*They are tested at Unit and Integration levels*
+*Each script is written and executed within a rake task*
+*Scripts are tested at Unit and Integration levels*
 *The methods used in each script are located in the StreetCafe Model*
 
 Unit Testing
 
-*Each individual method is tested independently in a model spec located at the file path below*
+*Every method is tested in a model spec located at the file path below*
 
 ```/spec/models/street_cafe_spec.rb```
 
@@ -120,11 +120,11 @@ Rake Task Name
 
 5. At this point run ```rake import:street_cafe_csv``` to populate the database with the street cafe csv data
 
-6. Run ```rails db:migrate``` again to migrate the post_code_info view to the database. The view can now be accessed and queried via ``psql ps-code-challenge_development```
+6. The post_code_info view can now be accessed and queried via ``psql ps-code-challenge_development```
 
-7. Run ```categorize:street_cafes``` to categorize street cafes based on post_code prefix and number of chairs
+7. Run ```categorize:street_cafes``` to categorize street cafes based on post code prefix and number of chairs
 
-8. Run ```rails db:migrate``` again to migrate the categories_info view to the database. The view can now be accessed and queried via ```psql ps-code-challenge_development```
+8. The categories_info view can now be accessed and queried via ```psql ps-code-challenge_development```
 
 9. Run ```export_and_delete:small_street_cafes``` to export the street cafes categorized as 'small' to a csv file ```small_street_cafes.csv``` generated in the directory
 
@@ -138,7 +138,7 @@ For individual test files you can run ```rspec spec/<FILE_PATH>```
 
 ### Additional Notes on Testing
 
-When running the ```rake_tasks_spec.rb``` the ```export_and_delete:small_street_cafes``` task generates a csv test file and then deletes it. If you have already generated the small_street_cafes csv in development, that file will be deleted when running the tests. This can easily be changed by removing the last line of code that deletes the csv after running.
+When running the ```rake_tasks_spec.rb``` the ```export_and_delete:small_street_cafes``` task generates a csv test file and then deletes it. If you have already generated the small_street_cafes.csv file in development, that file will be deleted when running the test. This can easily be changed in the test file by removing the last line of code that deletes the csv after running.
 
 ### Improvements I Would Consider with More Time
 
