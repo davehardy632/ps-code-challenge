@@ -26,6 +26,8 @@ describe StreetCafe, type: :model do
       let!(:categorized_ls1_cafes) {ls1_cafes.categorize_LS1_cafes}
       let!(:categorized_ls2_cafes) {ls2_cafes.categorize_LS2_cafes}
 
+      let(:file_argument) { stub(file_name: 'unit_test.csv') }
+
     describe ".with_post_code_prefix" do
       it "Returns street cafes when passed a valid prefix parameter" do
 
