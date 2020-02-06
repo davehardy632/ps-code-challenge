@@ -120,7 +120,7 @@ Rake Task Name
 
 5. At this point run ```rake import:street_cafe_csv``` to populate the database with the street cafe csv data
 
-6. The post_code_info view can now be accessed and queried via ``psql ps-code-challenge_development```
+6. The post_code_info view can now be accessed and queried via ```psql ps-code-challenge_development```
 
 7. Run ```categorize:street_cafes``` to categorize street cafes based on post code prefix and number of chairs
 
